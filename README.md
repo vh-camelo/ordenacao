@@ -1,6 +1,6 @@
 # Comparação de Algoritmos de Ordenação
 
-Trabalho da disciplina Algoritmo e complexidade. O projeto implementa os algoritmos Bubble Sort, Insertion Sort e Selection Sort em JavaScript e mede o tempo de execução de cada um em três cenários de entrada (aleatório, ordenado e invertido), com tamanhos de 10 até 1.000.000 elementos.
+Trabalho da disciplina Algoritmo e complexidade. O projeto implementa os algoritmos Bubble Sort, Insertion Sort e Selection Sort em JavaScript (sem usar `Array.prototype.sort`) e mede o tempo de execução de cada um em três cenários de entrada (aleatório, ordenado e invertido), com tamanhos de 10 até 1.000.000 elementos.
 
 ## Requisitos
 
@@ -52,6 +52,21 @@ Cada execução do benchmark sobrescreve o arquivo `resultados.csv`.
 - Todos os algoritmos recebem o mesmo array de entrada em cada N.
 - Só a chamada do algoritmo é cronometrada. A verificação de corretude é feita fora do cronômetro.
 
+## Cenários de teste e casos teóricos
+
+Os três cenários (`aleatorio`, `ordenado` e `invertido`) são **entradas de teste** geradas por `gerarArray` em `utils.js`. Eles não são, por definição, o melhor, o médio e o pior caso: essa correspondência depende do algoritmo.
+
+| Algoritmo | `ordenado` | `invertido` | `aleatorio` |
+|---|---|---|---|
+| Bubble Sort (com parada antecipada) | melhor caso, O(n) | pior caso, O(n²) | caso médio, O(n²) |
+| Insertion Sort | melhor caso, O(n) | pior caso, O(n²) | caso médio, O(n²) |
+| Selection Sort | O(n²) | O(n²) | O(n²) |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) |
+| Quick Sort (pivô fixo no primeiro ou último) | pior caso, O(n²) | pior caso, O(n²) | caso médio, O(n log n) |
+| Quick Sort (mediana de três) | próximo de O(n log n) | próximo de O(n log n) | caso médio, O(n log n) |
+
+Selection e Merge têm a mesma ordem de grandeza nos três cenários, porque fazem sempre o mesmo número de comparações. No Quick Sort, o que degenera é o pivô fixo, e não um cenário específico.
+
 ## Arquivo `resultados.csv`
 
 Separador `;` e decimal com vírgula (abre direto no Excel em português; no Google Planilhas, use *Arquivo > Importar* e escolha o separador `;`).
@@ -76,9 +91,3 @@ Separador `;` e decimal com vírgula (abre direto no Excel em português; no Goo
 | Sistema operacional | [PREENCHER] |
 | Versão do Node.js | [PREENCHER] |
 
-## Integrantes do grupo
-
-- Victor Hugo
-- Kaic Silva
-- Gabriel Cirqueira 
-- Samuel Santos
